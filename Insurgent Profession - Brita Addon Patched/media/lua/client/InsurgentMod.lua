@@ -16,8 +16,6 @@ local function InsurgentBeginGame(player)
         return
     end
 	
-	print("zzzPatchInsurgentMod.lua Check 1")
-	
     local inv = player:getInventory();
 	local bagFound = false;
 	
@@ -27,8 +25,6 @@ local function InsurgentBeginGame(player)
     elseif	player:HasTrait("LoadoutNoRations") then	
         ration = 0;
     end	
-	
-	print("zzzPatchInsurgentMod.lua Check 2")
     
 	inv:AddItems("Insurgent.DeployedParachute", 1)
     inv:AddItems("Base.WaterBottleFull", 1)
@@ -36,50 +32,17 @@ local function InsurgentBeginGame(player)
     inv:AddItems("Base.KnifeSheath", 1)
     inv:AddItems("Base.HuntingKnife", 1)
 	
-	print("zzzPatchInsurgentMod.lua Check 3")
-	
-	for i = 0, inv:getItems():size() - 1 do
-        local item = inv:getItems():get(i)
-        if item ~= nil then
-            local itemFullType = item:getFullType()
-            if itemFullType == "Insurgent.Bag_ALICEpack_Insurgent" or 
-                itemFullType == "Base.Bag_ALICEpack_Army" or 
-                itemFullType == "Base.Bag_ALICEpack" then
-                bagFound = true
-				
-				print("zzzPatchInsurgentMod.lua Check 4")
-				
-                local bagInv = item:getInventory();
-                    bagInv:AddItems("Base.Screwdriver", 1)
-					bagInv:AddItems("Base.AlcoholBandage", 3)
-					bagInv:AddItems("Base.AlcoholWipes", 1)
-					bagInv:AddItems("Susceptible.GasmaskFilter", 2)
-					bagInv:AddItems("Base.WaterBottleFull", 1 * ration)
-					bagInv:AddItems("Base.OatsRaw", 2 * ration)
-					bagInv:AddItems("Radio.WalkieTalkie5", 1)
-                break
-            end
-			
-			print("zzzPatchInsurgentMod.lua Check 5")
-			
-        end
-    end
-	
-	print("zzzPatchInsurgentMod.lua Check 6")
-	
-	if not bagFound then
-			print("zzzPatchInsurgentMod.lua Check bag not found")
-			inv:AddItems("Base.Screwdriver", 1)
-			inv:AddItems("Base.AlcoholBandage", 3)
-			inv:AddItems("Base.AlcoholWipes", 1)
-			inv:AddItems("Susceptible.GasmaskFilter", 2)
-			inv:AddItems("Base.WaterBottleFull", 1 * ration)
-			inv:AddItems("Base.OatsRaw", 2 * ration)
-			inv:AddItems("Radio.WalkieTalkie5", 1)
-	end
-	
-	print("zzzPatchInsurgentMod.lua Check 7")
-
+	--Adds items to backpack if player has one, to inv if they do not
+	local itemsTable = {
+		{name = "Base.Screwdriver", count = 1},
+		{name = "Base.AlcoholBandage", count = 3},
+		{name = "Base.AlcoholWipes", count = 1},
+		{name = "Susceptible.GasmaskFilter", count = 2},
+		{name = "Base.WaterBottleFull", count = 1 * ration},
+		{name = "Base.OatsRaw", count = 2 * ration},
+		{name = "Radio.WalkieTalkie5", count = 1},
+    }
+    addItemsToBag(player, itemsTable)
 
     if player:HasTrait("Smoker") then
         inv:AddItems("Base.Lighter", 1)

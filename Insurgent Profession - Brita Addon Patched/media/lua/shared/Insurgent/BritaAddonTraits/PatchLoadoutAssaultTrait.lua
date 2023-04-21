@@ -19,34 +19,8 @@ function LoadoutAssaultTrait.OnNewGame(player)
 	
 	end
 	
-	local inv = player:getInventory();
-	local bagFound = false;
-	
-	for i = 0, inv:getItems():size() - 1 do
-        local item = inv:getItems():get(i)
-        if item ~= nil then
-            local itemFullType = item:getFullType()
-            if itemFullType == "Insurgent.Bag_ALICEpack_Insurgent" or 
-                itemFullType == "Base.Bag_ALICEpack_Army" or 
-                itemFullType == "Base.Bag_ALICEpack" then
-                bagFound = true
-				
-                local bagInv = item:getInventory();
-				
-                    bagInv:AddItems("Base.Sledgehammer", 1)
-					
-                break
-            end
-			
-        end
-    end
-	
-	
-	if not bagFound then
-	
-			inv:AddItems("Base.Sledgehammer", 1)
-
-	end
-	
-	
+	local itemsTable = {
+            {name = "Base.Sledgehammer", count = 1},
+        }
+        addItemsToBag(player, itemsTable)	
 end
