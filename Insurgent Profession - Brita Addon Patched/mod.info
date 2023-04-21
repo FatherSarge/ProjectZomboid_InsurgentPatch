@@ -1,0 +1,6 @@
+name=Insurgent Profession - PatchBrita
+id=InsurgentBRITAWEAPONSpatched
+description= A test patch for Insurgency for Brita
+description= <LINE><LINE> ONLY USE 1 COMPATIBILITY ADD-ON
+poster=poster.png
+require=Insurgent,Brita,InsurgentBRITAWEAPONS
